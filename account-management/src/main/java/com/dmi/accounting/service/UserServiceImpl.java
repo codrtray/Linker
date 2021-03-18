@@ -28,4 +28,10 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = integerUserDtoMap.get(id);
         return Optional.ofNullable(userDto);
     }
+
+    @Override
+    public boolean deleteUserById(String id) {
+        return integerUserDtoMap.remove(id) != null;
+    }
+
 }
