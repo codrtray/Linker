@@ -10,12 +10,12 @@ import java.util.Set;
 
 @Getter @Setter
 public class CreateUserRequestModel {
-    @NotBlank
+    @NotBlank(message = "Name must not be blank")
     private String fullname;
     @Email
     private String email;
     @NotBlank
-    @Size(min = 8)
+    @Size(min = 8, message = "Password must be more 8 characters")
     private String password;
 
     @Size(min = 1)
