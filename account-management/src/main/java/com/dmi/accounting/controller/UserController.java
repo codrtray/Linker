@@ -8,6 +8,8 @@ import com.dmi.accounting.model.CreateUserRequestModel;
 import com.dmi.accounting.model.UserResponseModel;
 import com.dmi.accounting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +30,15 @@ public class UserController {
     private final CreateUserMapper createUserMapper;
     private final UserDtoMapper userDtoMapper;
     private final UserService userService;
+    private final MessageSource messageSource;
 
     @Autowired
     public UserController(CreateUserMapper createUserMapper, UserDtoMapper userDtoMapper,
-                          UserService userService) {
+                          UserService userService, MessageSource messageSource) {
         this.createUserMapper = createUserMapper;
         this.userDtoMapper = userDtoMapper;
         this.userService = userService;
+        this.messageSource = messageSource;
     }
 
     @GetMapping
@@ -60,16 +64,18 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@Valid @RequestBody CreateUserRequestModel createUserRequestModel) {
+    public ResponseEntity<String> createUser(@Valid @RequestBody CreateUserRequestModel requestModel) {
 
-        UserDto userDto = createUserMapper.toUserDto(createUserRequestModel);
+        UserDto userDto = createUserMapper.toUserDto(requestModel);
         Optional<String> userId = userService.createUser(userDto);
+
+        String message = messageSource.getMessage("user-is-created", null, LocaleContextHolder.getLocale());
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(userId.orElse("null")).toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(message);
     }
 
     @DeleteMapping("/{id}")
