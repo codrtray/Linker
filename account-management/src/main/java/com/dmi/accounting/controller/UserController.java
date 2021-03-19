@@ -8,6 +8,8 @@ import com.dmi.accounting.model.CreateUserRequestModel;
 import com.dmi.accounting.model.UserResponseModel;
 import com.dmi.accounting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,6 +17,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -32,14 +37,26 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public ResponseEntity<?> retrieveAllUsers() {
+        return ResponseEntity.ok("It is ok");
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseModel> getUser(@PathVariable String id) {
+    public EntityModel<UserResponseModel> getUser(@PathVariable String id) {
         Optional<UserDto> user = userService.getUser(id);
         if (user.isEmpty()) {
             throw new UserNotFoundException(String.format("User with id:%s is not found", id));
         }
         UserResponseModel userResponseModel = userDtoMapper.toUserDto(user.get());
-        return ResponseEntity.ok(userResponseModel);
+
+        EntityModel<UserResponseModel> resource = EntityModel.of(userResponseModel);
+
+        WebMvcLinkBuilder linkTo =
+                linkTo(methodOn(this.getClass()).retrieveAllUsers());
+
+        resource.add(linkTo.withRel("all-users"));
+        return resource;
     }
 
     @PostMapping
