@@ -1,4 +1,8 @@
-# accounting
+# Linker
+
+Technologies: 
+- Microservice architecture; Spring Boot 2.4; Spring Cloud 2020; Resilience4j; 
+- MapStruct 
 
 
 ##### Requests
