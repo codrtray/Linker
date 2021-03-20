@@ -1,0 +1,6 @@
+gateway:
+  ip: localhost
+
+token:
+  expiration-time: 86400
+  secret: slfdkjghsldfkj

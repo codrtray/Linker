@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.dmi</groupId>
-    <artifactId>linker</artifactId>
+    <groupId>org.dmi.linker</groupId>
+    <artifactId>linker-parent</artifactId>
     <packaging>pom</packaging>
     <version>0.1</version>
     <modules>
@@ -14,6 +14,7 @@
         <module>account-management</module>
         <module>discovery</module>
         <module>gateway</module>
+        <module>config-server</module>
     </modules>
 
     <properties>
@@ -43,12 +44,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -76,9 +77,9 @@
                 <version>${model.mapper.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dmi</groupId>
+                <groupId>org.dmi.linker</groupId>
                 <artifactId>common</artifactId>
-                <version>${project.version}</version>
+                <version>0.1</version>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>

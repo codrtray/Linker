@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: config-server-ws
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file://${LINKER_PATH}/props
+server:
+  port: 8012
+  servlet:
+    context-path: /config
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh,bus-env,health
+

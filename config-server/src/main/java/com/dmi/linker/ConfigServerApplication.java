@@ -2,12 +2,12 @@ package com.dmi.linker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
-@EnableConfigurationProperties
-public class TaskApplication {
+@EnableConfigServer
+public class ConfigServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TaskApplication.class, args);
+        SpringApplication.run(ConfigServerApplication.class, args);
     }
 }
