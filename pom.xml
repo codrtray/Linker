@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.dmi</groupId>
-    <artifactId>accounting</artifactId>
+    <artifactId>linker</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
     <modules>
-        <module>warehouse</module>
+        <module>task</module>
         <module>common</module>
         <module>account-management</module>
         <module>discovery</module>
