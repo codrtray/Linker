@@ -1,3 +1,4 @@
+
 server:
   port: 8083
 
@@ -6,4 +7,10 @@ spring:
     name: task-ws
   config:
     import: optional:configserver:${SPRING_CLOUD_CONFIG_URI:http://localhost:8012}/config/
+  profiles:
+    active: dev
+  cloud:
+    config:
+      profile: dev
+      name: task-ws
 

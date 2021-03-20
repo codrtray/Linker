@@ -1,10 +1,3 @@
-spring:
-  datasource:
-    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
-    driverClassName: org.h2.Driver
-    username: sa
-    password: 12
-
 test:
   test: blabla
 
