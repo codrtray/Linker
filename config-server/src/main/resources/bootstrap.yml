@@ -1,5 +1,5 @@
 encrypt:
   key-store:
     location: file://${LINKER_PATH}/keys/apiEncryptionKey.jks
-    password: qw
+    password:
     alias: apiEncryptionKey

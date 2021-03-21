@@ -1,7 +1,5 @@
-
 server:
   port: 8083
-
 spring:
   application:
     name: task-ws
@@ -13,4 +11,3 @@ spring:
     config:
       profile: dev
       name: task-ws
-
