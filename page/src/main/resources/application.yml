@@ -1,0 +1,6 @@
+
+spring:
+  config:
+    import: optional:configserver:${SPRING_CLOUD_CONFIG_URI:http://localhost:8012}/config/
+server:
+  port: 8084
