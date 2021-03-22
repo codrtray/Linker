@@ -1,5 +1,7 @@
 package com.dmi.linker;
 
+import com.dmi.linker.entity.Task;
+import com.dmi.linker.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +19,9 @@ public class TaskApplication {
     @Autowired
     private Environment env;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(TaskApplication.class, args);
     }
@@ -24,6 +29,9 @@ public class TaskApplication {
 
     @EventListener(ApplicationReadyEvent.class)
     public void outputMessage() {
+
+
+
         log.info(env.getProperty("user.dir"));
     }
 }

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 1
+    url: jdbc:postgresql://localhost:5432/linker-dev
+    username: dmi
+    password: '{cipher}AQAemRvmHVhQcwqGN/lSsMzzrwr0fTnAOpvvRaUe75z1N9HxYn4f6x2+4ezJcaYokbrSID10ZKdRYb1A1X7niPaJDXYvKXK9lsO9aWwNtxmQVS8UG6dz4uIX14unHIWN3aZR8n+T6Fn/CO+28lFCEDvL10VzigbBmeCkcJKoQwMow9DCQGxkXQlEB4hj+6/edJ4EOxPU+uSt2gwSw/Re6+wfl7O/3TQqgKyjyjK9QfPcRYLaha/ZzirJlSXd3rgpY5ztxDdxKbjTlWAG4lOCpWpfa9he+4WmDRfRiG1NYRnGy2IR0IiWx3qnsOoUhsUmzOaNUhI7IqhXKl1ARIj7p+zw3YKDunrk1CI638P+PWMs5IZhlzd5O0PbNEqJBkEbGrA='
+    platform: postgres
+    initialization-mode: always
+    jpa:
+      database: postgresql
+      show-sql: true
+      generate-ddl: false
+      hibernate:
+        ddl-auto: validate

@@ -6,12 +6,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd ">
 
-<changeSet id="1" author="Dmi" dbms="postgresql" >
-	<sqlFile dbms="postgresql" path="updates/changelog-1.sql" relativeToChangelogFile="true" />
+<changeSet id="1" author="Dmi" dbms="postgresql">
+	<validCheckSum>ANY</validCheckSum>
+	<sqlFile dbms="postgresql" path="clear.sql" relativeToChangelogFile="true"/>
 </changeSet>
-
-<changeSet id="2" author="Dmi">
-	<!--Insert XML changes objects here https://www.liquibase.org/documentation/xml_format.html-->
-</changeSet>
-
 </databaseChangeLog>

@@ -2,12 +2,12 @@
 App to manage tasks, notes etc. Something is like Evernote.
 
 Technologies: 
-- Microservice architecture: Spring Boot 2.4, Spring Cloud 2020, Resilience4j;
+- Microservice architecture: Spring Boot 2.4, Spring Cloud 2020, Resilience4j, Feign;
 - Secure: Spring Security and tokens ;
 - Messaging: Kafka
-- Misc: MapStruct ;
-- Database: PostgreSQL, File system for pages
+- Database: Liquibase, PostgreSQL, File system for pages
 - Build: Maven, Docker, Kubernetes 
+- Other: MapStruct ;
 
 Future
 - UI on React

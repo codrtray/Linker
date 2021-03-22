@@ -3,6 +3,8 @@
 --liquibase formatted sql
 
 --changeset dmi:1 runAlways:true
-drop table task;
+DROP TABLE IF EXISTS task;
 --changeset dmi:2 runAlways:true
-delete from databasechangelog;
+DELETE FROM databasechangelog;
+--changeset dmi:3 runAlways:true
+DROP SEQUENCE IF EXISTS global_seq;
