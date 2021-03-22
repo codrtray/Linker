@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: release-0.0.1
+      author: Dmi
+      changes:
+        -  tagDatabase:
+             tag: 0.0.1
+  - changeSet:
+      id: 1
+      author: Dmi
+#      logicalFilePath: dfg
+      context: User
+      labels: InitialCommit
+      comment: Initial changes
+      changes:
+        - sqlFile:
+            path: changelog-1.sql
+            relativeToChangelogFile: true
+      rollback:
+        - sqlFile:
+            path: rollback-changelog-1.sql
+            relativeToChangelogFile: true

@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: ${PORT:0}
 spring:
   application:
     name: task-ws
@@ -11,3 +11,18 @@ spring:
     config:
       profile: dev
       name: task-ws
+  jpa:
+    show-sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone: ${SPRING_CLOUD_DISCOVERY_URI:http://localhost:8010}/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+logging:
+  level:
+    org:
+      hibernate:
+        sql: trace
+        type: trace

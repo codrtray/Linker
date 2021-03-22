@@ -1,39 +1,30 @@
 package com.dmi.linker.entity;
 
-import com.google.common.base.Objects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "task")
-@Getter @Setter
+@Table(name = "tag")
+@Getter
+@Setter
 @NoArgsConstructor
-public class Task {
+public class Tag {
 
-    private Long id;
+    protected long id;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 30)
     private String name;
-
-    @Column(length = 255)
-    private String description;
-
-    @Column(nullable = false, unique = true, length = 36)
-    @NaturalId
-    private String taskId;
-
-    @Column
+    @Column(length = 36)
     private String parentId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_generator")
-    @SequenceGenerator(name="task_generator", sequenceName = "task_seq", allocationSize=10)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tag_generator")
+    @SequenceGenerator(name = "tag_generator", sequenceName = "tag_seq", allocationSize = 10)
     @Column(name = "id", updatable = false, nullable = false)
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -41,8 +32,11 @@ public class Task {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equal(taskId, task.taskId);
+
+        Tag that = (Tag) o;
+
+        if (id != that.id) return false;
+        return name != null ? name.equals(that.name) : that.name == null;
     }
 
     @Override
