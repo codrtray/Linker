@@ -26,3 +26,14 @@ logging:
       hibernate:
         sql: trace
         type: trace
+resilience4j:
+  retry:
+    instances:
+      sample:
+        maxRetryAttempts: 3
+        waitDuration: 2s
+        enableExponentialBackoff: true
+  circuitbreaker:
+    instances:
+      sample2:
+        failureRateThreshold: 90
