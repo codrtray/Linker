@@ -11,6 +11,9 @@ spring:
     config:
       profile: dev
       name: page-ws
+  sleuth:
+    sampler:
+      probability: 1.0
 eureka:
   client:
     service-url:

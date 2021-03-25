@@ -2,6 +2,7 @@ package com.dmi.linker.controller;
 
 import com.dmi.linker.model.TaskResponse;
 import com.dmi.linker.service.TaskService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/task")
+@Slf4j
 public class TaskController {
 
     private final TaskService taskService;
@@ -28,6 +30,9 @@ public class TaskController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<TaskResponse> getTask(@PathVariable(value = "id") String taskId,
                                                 @RequestParam(required = false, defaultValue = "false") boolean addinfo) {
+
+
+        log.info("distributed tracing info, task service");
 
         final var task = taskService.getTask(taskId, addinfo);
 

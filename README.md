@@ -17,5 +17,5 @@ Future
 
 - http://localhost:8082/account/swagger-ui/index.html 
 - watch -n 0.1 curl http:/localhost:8082/task-ws/sample
-
+- docker run -d -p 9411:9411 openzipkin/zipkin:2.23
 
