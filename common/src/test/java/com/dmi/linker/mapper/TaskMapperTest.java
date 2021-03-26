@@ -35,13 +35,13 @@ class TaskMapperTest {
     private Task getTask(ArgumentsAccessor argumentsAccessor) {
         final var task = new Task();
         task.setName(argumentsAccessor.getString(0));
-        task.setName(argumentsAccessor.getString(1));
+        task.setDescription(argumentsAccessor.getString(1));
         return task;
     }
     private TaskResponse getTaskResponse(ArgumentsAccessor argumentsAccessor) {
         final var taskResponse = new TaskResponse();
         taskResponse.setName(argumentsAccessor.getString(0));
-        taskResponse.setName(argumentsAccessor.getString(1));
+        taskResponse.setDescription(argumentsAccessor.getString(1));
         return taskResponse;
     }
 }
