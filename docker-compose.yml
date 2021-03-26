@@ -1,0 +1,114 @@
+version: '3.7'
+
+services:
+  page-server:
+    image: codrtray/page:0.1
+    depends_on:
+      - config-server
+      - discovery-server
+      - zipkin-server
+      - rabbitmq
+    mem_limit: 800m
+    cpu_quota: 90000
+    environment:
+      server.port: 8058
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://discovery-server:8010/eureka
+      SPRING_CLOUD_CONFIG_URI: http://config-server:8012
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      spring.datasource.url: jdbc:postgresql://192.168.0.101:5432/linker-dev
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+    ports:
+      - "8058:8058"
+    networks:
+      - linker-network
+  task-server:
+    image: codrtray/task:0.1
+    depends_on:
+      - config-server
+      - discovery-server
+      - zipkin-server
+      - rabbitmq
+    mem_limit: 800m
+    cpu_quota: 90000
+    environment:
+      server.port: 8056
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://discovery-server:8010/eureka
+      SPRING_CLOUD_CONFIG_URI: http://config-server:8012
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      spring.datasource.url: jdbc:postgresql://192.168.0.101:5432/linker-dev
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+    ports:
+    - "8056:8056"
+    networks:
+      - linker-network
+  api-gateway-server:
+    image: codrtray/gateway:0.1
+    mem_limit: 700m
+    cpu_quota: 90000
+    ports:
+      - "8082:8082"
+    networks:
+      - linker-network
+    depends_on:
+      - discovery-server
+      - rabbitmq
+    environment:
+      server.port: 8082
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://discovery-server:8010/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+  discovery-server:
+    image: codrtray/discovery:0.1
+    mem_limit: 800m
+    cpu_quota: 90000
+    ports:
+    - "8010:8010"
+    networks:
+      - linker-network
+  config-server:
+    image: codrtray/config-server:0.1
+    mem_limit: 800m
+    cpu_quota: 90000
+    ports:
+    - "8012:8012"
+    environment:
+      LINKER_PATH: /confs
+    volumes:
+      - type: bind
+        source: ./configs
+        target: /confs
+    networks:
+      - linker-network
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    mem_limit: 300m
+    cpu_quota: 90000
+    ports:
+      - "9411:9411"
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    depends_on:
+        - rabbitmq
+    restart: always
+    networks:
+      - linker-network
+  rabbitmq:
+    image: rabbitmq:3.5.3-management
+    mem_limit: 300m
+    cpu_quota: 90000
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - linker-network
+
+networks:
+  linker-network:
+
+

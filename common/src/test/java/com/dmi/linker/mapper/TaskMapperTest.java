@@ -22,7 +22,10 @@ class TaskMapperTest {
 
     @DisplayName("test task mapper")
     @ParameterizedTest
-    @CsvSource({"task1, description1","task2, description2"})
+    @CsvSource({
+            "task1, description1",
+            "task2, description2"
+    })
     void taskMapperTest(ArgumentsAccessor argumentsAccessor) {
 
         final var task = getTask(argumentsAccessor);

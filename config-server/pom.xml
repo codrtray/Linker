@@ -21,4 +21,21 @@
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>codrtray/${project.artifactId}:${project.version}</name>
+                    </image>
+                    <pullPolicy>IF_NOT_PRESENT</pullPolicy>
+                    <excludeDevtools>true</excludeDevtools>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
