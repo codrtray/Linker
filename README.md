@@ -6,7 +6,7 @@ Technologies:
 - Secure: Spring Security and tokens ;
 - Messaging: Kafka
 - Database: Liquibase, PostgreSQL, File system for pages
-- Build: Maven, Docker, Kubernetes 
+- Build: Maven, Docker 
 - Other: MapStruct ;
 
 Future
